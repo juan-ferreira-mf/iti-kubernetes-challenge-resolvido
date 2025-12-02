@@ -36,60 +36,7 @@ O projeto demonstra boas práticas de DevOps e Cloud Native, incluindo container
 
 ### Diagrama do Fluxo
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    FLUXO DE DEPLOY                            │
-└─────────────────────────────────────────────────────────────┘
-
-    1. Criação do Cluster KIND
-    │
-    ├─> make cluster
-    │
-    └─> Cria cluster local com 1 control-plane + 2 workers
-        Nome: kind-itau-cluster
-
-    2. Instalação de Dependências do Cluster
-    │
-    ├─> make pre
-    │
-    └─> Instala MetalLB para LoadBalancer services
-        Namespace: metallb-system
-
-    3. Deploy de Dependências via Helm
-    │
-    ├─> make helm
-    │
-    └─> Aplica configurações via Helmfile
-        (ArgoCD, Ingress Controller, etc.)
-
-    4. Build e Push da Imagem Docker
-    │
-    ├─> make build
-    │
-    └─> Build multi-plataforma (amd64/arm64)
-        Push: juanferreiramf/iti-kubernetes-challenge:latest
-
-    5. Deploy da Aplicação via Terraform
-    │
-    ├─> cd terraform
-    ├─> terraform init
-    ├─> terraform plan -var-file=environment/development.tfvars
-    └─> terraform apply -var-file=environment/development.tfvars
-        │
-        ├─> Cria namespaces (rest-api, monitoring, kube-system)
-        ├─> Deploy REST API via Helm
-        ├─> Deploy kube-prometheus-stack
-        ├─> Deploy Loki
-        ├─> Deploy Tempo
-        └─> Deploy Metrics Server
-
-    6. Testes
-    │
-    └─> make tests
-        │
-        ├─> Port-forward REST API (localhost:8080)
-        └─> Port-forward Grafana (localhost:8089)
-```
+![Fluxograma ITI Itau](fluxograma-deploy.png)
 
 ## Makefile
 
