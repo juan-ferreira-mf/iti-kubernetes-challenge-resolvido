@@ -1,0 +1,7 @@
+apiVersion: v2
+name: iti-kubernetes-challenge
+description: Helm chart for ITI Kubernetes Challenge
+type: application
+version: 0.1.0
+appVersion: "1.0"
+
