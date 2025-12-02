@@ -1,5 +1,7 @@
 replicaCount: 1
 
+fullnameOverride: rest-api-iti-challenge
+
 namespace: default
 
 image:

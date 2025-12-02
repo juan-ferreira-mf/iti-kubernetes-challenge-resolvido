@@ -26,6 +26,10 @@ Projeto de desafio Kubernetes com deploy automatizado usando Terraform, Helm e K
 - **Makefile** - Automação de tarefas
 - **Helmfile** - Gerenciamento de releases Helm
 
+## Arquitetura
+
+![Topologia ITI Itau](topologia-iti-itau.png)
+
 ## Fluxo de Deploy
 
 ### Diagrama do Fluxo
