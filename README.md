@@ -1,6 +1,8 @@
 # ITI Kubernetes Challenge
 
-Projeto de desafio Kubernetes com deploy automatizado usando Terraform, Helm e KIND.
+Projeto de desafio **ITI Kubernetes Challenge** que implementa uma solução completa de deploy automatizado de uma API REST escrita em Kotlin em um cluster Kubernetes local (KIND). A aplicação é empacotada como Helm chart e gerenciada via Terraform, garantindo infraestrutura como código (IaC) e deploy reproduzível.
+
+O projeto demonstra boas práticas de DevOps e Cloud Native, incluindo containerização multi-plataforma, orquestração com Kubernetes, observabilidade completa (métricas, logs e traces), autoscaling, alta disponibilidade e segurança. A stack de observabilidade integra Prometheus, Grafana, Loki e Tempo para monitoramento end-to-end da aplicação. 
 
 ## Tecnologias Utilizadas
 
@@ -39,54 +41,54 @@ Projeto de desafio Kubernetes com deploy automatizado usando Terraform, Helm e K
 │                    FLUXO DE DEPLOY                            │
 └─────────────────────────────────────────────────────────────┘
 
-1. Criação do Cluster KIND
-   │
-   ├─> make cluster
-   │
-   └─> Cria cluster local com 1 control-plane + 2 workers
-       Nome: kind-itau-cluster
+    1. Criação do Cluster KIND
+    │
+    ├─> make cluster
+    │
+    └─> Cria cluster local com 1 control-plane + 2 workers
+        Nome: kind-itau-cluster
 
-2. Instalação de Dependências do Cluster
-   │
-   ├─> make pre
-   │
-   └─> Instala MetalLB para LoadBalancer services
-       Namespace: metallb-system
+    2. Instalação de Dependências do Cluster
+    │
+    ├─> make pre
+    │
+    └─> Instala MetalLB para LoadBalancer services
+        Namespace: metallb-system
 
-3. Deploy de Dependências via Helm
-   │
-   ├─> make helm
-   │
-   └─> Aplica configurações via Helmfile
-       (ArgoCD, Ingress Controller, etc.)
+    3. Deploy de Dependências via Helm
+    │
+    ├─> make helm
+    │
+    └─> Aplica configurações via Helmfile
+        (ArgoCD, Ingress Controller, etc.)
 
-4. Build e Push da Imagem Docker
-   │
-   ├─> make build
-   │
-   └─> Build multi-plataforma (amd64/arm64)
-       Push: juanferreiramf/iti-kubernetes-challenge:latest
+    4. Build e Push da Imagem Docker
+    │
+    ├─> make build
+    │
+    └─> Build multi-plataforma (amd64/arm64)
+        Push: juanferreiramf/iti-kubernetes-challenge:latest
 
-5. Deploy da Aplicação via Terraform
-   │
-   ├─> cd terraform
-   ├─> terraform init
-   ├─> terraform plan -var-file=environment/development.tfvars
-   └─> terraform apply -var-file=environment/development.tfvars
-       │
-       ├─> Cria namespaces (rest-api, monitoring, kube-system)
-       ├─> Deploy REST API via Helm
-       ├─> Deploy kube-prometheus-stack
-       ├─> Deploy Loki
-       ├─> Deploy Tempo
-       └─> Deploy Metrics Server
+    5. Deploy da Aplicação via Terraform
+    │
+    ├─> cd terraform
+    ├─> terraform init
+    ├─> terraform plan -var-file=environment/development.tfvars
+    └─> terraform apply -var-file=environment/development.tfvars
+        │
+        ├─> Cria namespaces (rest-api, monitoring, kube-system)
+        ├─> Deploy REST API via Helm
+        ├─> Deploy kube-prometheus-stack
+        ├─> Deploy Loki
+        ├─> Deploy Tempo
+        └─> Deploy Metrics Server
 
-6. Testes
-   │
-   └─> make tests
-       │
-       ├─> Port-forward REST API (localhost:8080)
-       └─> Port-forward Grafana (localhost:8089)
+    6. Testes
+    │
+    └─> make tests
+        │
+        ├─> Port-forward REST API (localhost:8080)
+        └─> Port-forward Grafana (localhost:8089)
 ```
 
 ## Makefile
