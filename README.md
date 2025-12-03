@@ -34,7 +34,7 @@ O projeto demonstra boas práticas de DevOps e Cloud Native, incluindo container
 
 ## Fluxo de Deploy
 
-### Diagrama do Fluxo
+### Fluxograma
 
 ![Fluxograma ITI Itau](fluxograma-deploy.png)
 
